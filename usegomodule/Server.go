@@ -4,7 +4,7 @@ import (
 	"fmt"
 
 	"github.com/valyala/fasthttp"
-	"github.com/wangyuche/practice/creategomodule/testmath"
+	"github.com/wangyuche/practice/creategomodule"
 )
 
 func httpHandle(ctx *fasthttp.RequestCtx) {
@@ -12,7 +12,8 @@ func httpHandle(ctx *fasthttp.RequestCtx) {
 }
 
 func main() {
-	testmath.Add(1, 2)
+	x := creategomodule.Add(1, 1)
+	fmt.Printf("x: %d\n", x)
 	if err := fasthttp.ListenAndServe("0.0.0.0:8080", httpHandle); err != nil {
 		fmt.Println("start fasthttp fail:", err.Error())
 	}
