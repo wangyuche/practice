@@ -1,0 +1,7 @@
+FROM golang:1.15.5-alpine
+WORKDIR /Users/ekko/learning/practice/usegomodule
+ADD . /Users/ekko/learning/practice/usegomodule
+RUN cd /Users/ekko/learning/practice/usegomodule && go build
+EXPOSE 8080
+#ENTRYPOINT ./Users/ekko/learning/practice/usegomodule/gomodule
+CMD [ "/Users/ekko/learning/practice/usegomodule/gomodule" ]
