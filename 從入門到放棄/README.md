@@ -1,7 +1,19 @@
 ### 架設環境
 
 ## Step 1
-先安裝`gitlab`
+安裝`docker`
+```
+yum install -y yum-utils
+yum-config-manager \
+    --add-repo \
+    https://download.docker.com/linux/centos/docker-ce.repo
+yum install -y docker-ce docker-ce-cli containerd.io    
+systemctl start docker
+systemctl enable docker
+```
+
+## Step 2
+安裝`gitlab`
 default account root
 ```
 docker run --detach \
@@ -10,8 +22,8 @@ docker run --detach \
   --name gitlab \
   --restart always \
   --volume /etc/localtime:/etc/localtime:ro \
-  --volume /Users/arieswang/Documents/gitlab/config:/etc/gitlab \
-  --volume /Users/arieswang/Documents/gitlab/logs:/var/log/gitlab \
-  --volume /Users/arieswang/Documents/gitlab/data:/var/opt/gitlab \
+  --volume /root/gitlab/config:/etc/gitlab \
+  --volume /root/gitlab/logs:/var/log/gitlab \
+  --volume /root/gitlab/data:/var/opt/gitlab \
   gitlab/gitlab-ce:latest
 ```
