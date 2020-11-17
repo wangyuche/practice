@@ -1,0 +1,28 @@
+variables:
+  PROJECT_NAME: "geoip"
+  GIT_SUBMODULE_STRATEGY: recursive
+
+stages:
+  - buildbyTag
+  - build_code
+  - baseimages
+  - build_docker
+  - publish
+   
+include:
+  - project: 'arieswang/ci-file'
+    ref: master
+    file: '/golang.tag.yml'
+  - project: 'arieswang/ci-file'
+    ref: master
+    file: '/golang.build.yml'
+  - project: 'arieswang/ci-file'
+    ref: master
+    file: '/golang.baseimages.yml'   
+  - project: 'arieswang/ci-file'
+    ref: master
+    file: '/golang.docker.yml'
+  - project: 'arieswang/ci-file'
+    ref: master
+    file: '/golang.publish.yml'
+
