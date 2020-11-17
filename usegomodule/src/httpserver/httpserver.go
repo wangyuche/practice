@@ -14,17 +14,20 @@ import (
 
 type server struct {
 	srv *http.Server
+	hc  bool
 }
 
 func New(port string) *mux.Router {
 	s := &server{}
 	router := mux.NewRouter()
 	router.HandleFunc("/health", s.health).Methods("GET")
+	router.HandleFunc("/change", s.change).Methods("GET")
 	srv := &http.Server{
 		Addr:    port,
 		Handler: router,
 	}
 	s.srv = srv
+	s.hc = true
 	go func() {
 		if err := srv.ListenAndServe(); err != nil && err != http.ErrServerClosed {
 			panic(err.Error())
@@ -49,5 +52,17 @@ func (this *server) signal() {
 }
 
 func (this *server) health(res http.ResponseWriter, req *http.Request) {
-	res.WriteHeader(http.StatusOK)
+	if this.hc {
+		res.WriteHeader(http.StatusOK)
+	} else {
+		res.WriteHeader(http.StatusNotFound)
+	}
+}
+
+func (this *server) change(res http.ResponseWriter, req *http.Request) {
+	if this.hc {
+		this.hc = false
+	} else {
+		this.hc = true
+	}
 }
