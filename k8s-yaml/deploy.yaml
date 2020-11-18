@@ -23,7 +23,7 @@ spec:
         envFrom:
         - configMapRef:
             name: practice
-        image: gcr.io/yile-it/scg/practice:32b819fb
+        image: gcr.io/yile-it/scg/practice:8389f953
         imagePullPolicy: Always
         ports:
         - containerPort: 8080

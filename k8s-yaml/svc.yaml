@@ -4,7 +4,7 @@ metadata:
   name: practice
   namespace: default
 spec:
-  type: ClusterIP
+  type: LoadBalancer
   selector:
     app: practice
   ports:

@@ -14,8 +14,8 @@ func main() {
 	fmt.Printf("x: %d\n", x)
 	router := httpserver.New(os.Getenv("port"))
 	router.HandleFunc("/test", test).Methods("GET")
-	lock := make(chan bool)
-	lock <- true
+	quit := make(chan os.Signal, 1)
+	<-quit
 }
 
 func test(res http.ResponseWriter, req *http.Request) {

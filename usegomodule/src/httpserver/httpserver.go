@@ -43,12 +43,14 @@ func (this *server) signal() {
 	quit := make(chan os.Signal, 1)
 	signal.Notify(quit, syscall.SIGINT, syscall.SIGTERM)
 	<-quit
-	fmt.Printf("%s\n", "Server Shutdown")
+	fmt.Printf("%s\n", "Server Shutdowning")
+	time.Sleep(5 * time.Second)
 	ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
 	defer cancel()
 	if err := this.srv.Shutdown(ctx); err != nil {
 		panic(err.Error())
 	}
+	fmt.Printf("%s\n", "Server Shutdowned")
 }
 
 func (this *server) health(res http.ResponseWriter, req *http.Request) {
