@@ -1,0 +1,7 @@
+FROM golang:1.15.5
+WORKDIR /Users/cherryzhag/usegomodule
+COPY ./ .
+RUN cd /Users/cherryzhag/usegomodule && go build
+ENTRYPOINT [ "/Users/cherryzhag/usegomodule/gomodule"]
+
+

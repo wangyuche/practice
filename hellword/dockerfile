@@ -1,0 +1,7 @@
+FROM golang:1.15.5
+WORKDIR /Users/cherryzhag/helloworld
+COPY ./ .
+RUN cd /Users/cherryzhag/helloworld && go build
+ENTRYPOINT [ "/Users/cherryzhag/helloworld/helloworld"]
+
+

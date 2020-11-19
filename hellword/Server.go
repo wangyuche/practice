@@ -10,4 +10,6 @@ func main() {
 	for {
 		time.Sleep(time.Second)
 	}
+
+	fmt.Printf("%s\n", "helloword end")
 }
