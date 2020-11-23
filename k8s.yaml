@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-deployment
+spec:
+  replicas: 1
+  selector:
+   matchLabels:
+    app: demoUsegomodule
+  template:
+    metadata:
+      labels:
+        app: demoUsegomodule
+    spec:
+      containers:
+      - name: usegomodule-container
+        image: gcr.io/yile-it/cherry/server:1.0.0
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+        env:
+        - name: port
+          value: ":8080"
+      imagePullSecrets:
+      - name: docker-pull-cred
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-service
+spec:
+  selector:
+    app:  demoUsegomodule
+  type: NodePort
+  ports:
+    - protocol: TCP
+      port: 8081
+      targetPort: 8080
+      nodePort:  30390

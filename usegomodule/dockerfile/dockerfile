@@ -5,9 +5,10 @@ MAINTAINER AriesWang
 ARG filename
 ARG version
 
-ENV File=${filename}_${version}
+#執行目錄
+ENV File=${filename}_${version}  
 
-ADD ${File} ${File}
+ADD ${filename} ${File}
 ADD run.sh run.sh
 RUN chmod +x /${File}
 RUN chmod +x /run.sh
