@@ -12,7 +12,9 @@ import (
 func main() {
 	x := creategomodule.Add(1, 1)
 	fmt.Printf("x: %d\n", x)
-	router := httpserver.New(os.Getenv("port"))
+	port := os.Getenv("port")
+	fmt.Printf("port: %s", port)
+	router := httpserver.New(port)
 	router.HandleFunc("/test", test).Methods("GET")
 	quit := make(chan os.Signal, 1)
 	<-quit
